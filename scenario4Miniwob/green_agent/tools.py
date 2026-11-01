@@ -169,13 +169,10 @@ async def get_task_description():
 
 @ab.tool
 async def execute_white_agent_action(playwright_action: str) -> str:
-    # dummy test
-    playwright_action = f"""page.get_by_role("button", name="Submit").click()"""
-
     global miniwob_env, current_obs, current_info, reward_history, action_execution_count
 
     # No more than 10 turns
-    if action_execution_count > MAX_ACTION_EXECUTIONS:
+    if action_execution_count >= MAX_ACTION_EXECUTIONS:
         return json.dumps({
             "success": True,
             "terminated": True,
