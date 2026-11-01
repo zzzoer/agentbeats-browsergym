@@ -117,7 +117,8 @@ async def evaluate_white_agent_action(agent_action: str) -> str:
     global current_task, task_history
     if not current_task: return json.dumps({"error": "No active task"})
 
-    expected_action_str = current_task.get("expected_action", "")
+    # Dataset rows store the reference action under "action", as used by get_weblinx_task.
+    expected_action_str = current_task.get("action", "")
     
     # 解析
     agent_func, agent_args = parse_weblinx_action(agent_action)
